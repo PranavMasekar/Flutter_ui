@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ui/singlepost.dart';
+import 'package:flutter_ui/first%20ui/singlepost.dart';
 
 class MyPost extends StatelessWidget {
   @override

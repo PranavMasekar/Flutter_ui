@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ui/post.dart';
-import 'package:flutter_ui/profile.dart';
+import 'package:flutter_ui/second%20ui/homepage.dart';
 
-import 'appbar.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,22 +12,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
-          backgroundColor: Color(0xff1e0d2d),
-          body: ListView(
-            children: [
-              Stack(
-                children: [
-                  MyPost(),
-                  Profile(),
-                  MyAppBar(),
-                ],
-              )
-            ],
-          ),
-        ),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      home: MyHomePage(),
     );
   }
 }
