@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ui/second%20ui/homepage.dart';
-
+import 'package:flutter_ui/Third%20ui/homescreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,11 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(),
+      home: HomeScreen(),
     );
   }
 }
