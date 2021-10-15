@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
-class FolderCard extends StatelessWidget {
+class FolderCard extends StatefulWidget {
   final String name;
   final int items;
   FolderCard({required this.name, required this.items});
+
+  @override
+  _FolderCardState createState() => _FolderCardState();
+}
+
+class _FolderCardState extends State<FolderCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,7 +46,7 @@ class FolderCard extends StatelessWidget {
             height: 10,
           ),
           Text(
-            "  $name",
+            "  ${widget.name}",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -50,7 +56,7 @@ class FolderCard extends StatelessWidget {
             height: 10,
           ),
           Text(
-            "  $items items",
+            "  ${widget.items} items",
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,

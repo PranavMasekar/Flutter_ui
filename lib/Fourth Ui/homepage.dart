@@ -1,5 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_ui/Fourth%20Ui/landingpage.dart';
+
+import 'services/auth.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -7,6 +12,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Future<void> checkuserlog() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    // ignore: await_only_futures
+    final user = await auth.currentUser;
+    if (user != null) {
+      name = user.displayName.toString();
+      email = user.email.toString();
+      imgurl = user.photoURL.toString();
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => MyPage()));
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkuserlog();
+  }
+
+  signInMethod() async {
+    await signin();
+    // constant.name = (await LocalData.getname())!;
+    // constant.email = (await LocalData.getemail())!;
+    // constant.img = (await LocalData.getimg())!;
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => MyPage()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -62,31 +95,13 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 50,
               ),
-              Container(
-                width: 70.0,
-                height: 80.0,
-                child: new RawMaterialButton(
-                  onPressed: () {
-                    _navigateToNextScreen(context);
-                  },
-                  fillColor: Color(0xfffb83fe),
-                  shape: new CircleBorder(),
-                  elevation: 10.0,
-                  child: Icon(
-                    Icons.arrow_forward_outlined,
-                    size: 35,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              SignInButton(Buttons.Google, onPressed: () {
+                signInMethod();
+              })
             ],
           ),
         ),
       ),
     );
   }
-}
-
-void _navigateToNextScreen(BuildContext context) {
-  Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyPage()));
 }

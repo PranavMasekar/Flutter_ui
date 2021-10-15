@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ui/Fourth%20Ui/cloudpage.dart';
-import 'package:flutter_ui/Fourth%20Ui/homepage.dart';
+// import 'package:flutter_ui/Fourth%20Ui/homepage.dart';
 import 'package:flutter_ui/Fourth%20Ui/storage.dart';
 
 class MyPage extends StatefulWidget {
@@ -9,9 +9,9 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
-  int itemindex = 1;
+  int itemindex = 0;
   List<Widget> mylist = [
-    HomePage(),
+    // HomePage(),
     MyStorage(),
     MyCloud(),
   ];
@@ -28,10 +28,6 @@ class _MyPageState extends State<MyPage> {
       body: mylist.elementAt(itemindex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.folder),
             label: "Folders",

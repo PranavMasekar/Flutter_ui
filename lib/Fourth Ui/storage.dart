@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ui/Fourth%20Ui/services/auth.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class MyStorage extends StatelessWidget {
@@ -36,7 +37,7 @@ class MyStorage extends StatelessWidget {
                 ],
               ),
               Text(
-                "Rendy",
+                name,
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,

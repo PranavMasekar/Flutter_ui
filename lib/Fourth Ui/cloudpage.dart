@@ -1,11 +1,44 @@
-import 'dart:ui';
-
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:flutter_ui/Fourth%20Ui/folder_card.dart';
+import 'services/file.dart';
 
-class MyCloud extends StatelessWidget {
+class MyCloud extends StatefulWidget {
+  @override
+  _MyCloudState createState() => _MyCloudState();
+}
+
+class _MyCloudState extends State<MyCloud> {
   @override
   Widget build(BuildContext context) {
+    File? file;
+    UploadTask? task;
+    String filename = "No File is selected";
+    selectfile() async {
+      final result = await FilePicker.platform.pickFiles(allowMultiple: true);
+      if (result == null) {
+        return print("error");
+      } else {
+        final path = result.files.single.path;
+        setState(() {
+          file = File(path!);
+          filename = basename(file!.path);
+        });
+      }
+    }
+
+    uploadfile() {
+      if (file == null) {
+        return;
+      }
+      final destination = "files/$filename";
+      task = MYFirebaseStorage.uploadFile(destination, file!);
+      setState(() {});
+    }
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xfffcfcfc),
@@ -227,6 +260,41 @@ class MyCloud extends StatelessWidget {
               ),
               SizedBox(
                 height: 20,
+              ),
+              // Container(
+              //   height: 40,
+              //   width: 100,
+              //   decoration: BoxDecoration(
+              //       gradient: LinearGradient(
+              //         colors: [
+              //           Color(0xfffda8fe),
+              //           Color(0xfffc7aff),
+              //         ],
+              //       ),
+              //       borderRadius: BorderRadius.circular(10)),
+              //   child: Text(
+              //     "Select A File ",
+              //     style: TextStyle(fontSize: 20),
+              //   ),
+              // ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xff7b4cfd),
+                ),
+                onPressed: () {
+                  selectfile();
+                },
+                child: Text("Select A File"),
+              ),
+              Text(filename),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xff7b4cfd),
+                ),
+                onPressed: () {
+                  uploadfile();
+                },
+                child: Text("Upload File"),
               ),
               Align(
                 alignment: Alignment.centerLeft,
